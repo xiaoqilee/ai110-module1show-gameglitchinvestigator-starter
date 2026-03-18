@@ -25,14 +25,12 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+The purpose of the game is to guess a randomly generated number within a certain range that changes depending on what mode is being played. The user is given a fixed number of attempts and can use hints to understand if they should guess higher or lower than the most recent value guessed.
+
+Some bugs I found were that the hint logic was incorrect. Guesses higher than the secret number would incorrectly tell the player to go higher. The game state also did not reset properly when changing modes. This led to the secret number, history, and score to be reused. Additionally, the code mixed UI and game logic. Furthermore, the "Hard" mode had a smaller range than the "Normal" mode. I also noticed that invalid inputs still counted as attempts and were added to the guess history and that attempts started at 1.
+
+To fix these issues, I used an AI assistant to help correct the comparison logic in the check_guess function so that guesses higher than the secret correctly prompt the player to go lower and vice versa. I also used it to refactor the core game logic into logic_utils.py. To fix the game state issues, I used it to add a proper reset function using session state so that changing difficulty or starting a new game resets the secret number, history, score, and attempts. It also updated the difficulty settings so that "Hard" mode uses a larger range than "Normal," making it more challenging. Additionally, I fixed the input handling so that attempts are only counted for valid guesses and invalid inputs are not added to the history. Finally, I corrected the initial attempt count to start at 0 instead of 1 to accurately reflect the number of guesses made. I verified these fixes by testing the Streamlit app and using pytest to confirm that the guess logic behaved correctly.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
-
-## 🚀 Stretch Features
-
-- [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
+![Demo](./demo.png)
